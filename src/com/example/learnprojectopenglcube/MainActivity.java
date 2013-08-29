@@ -1,32 +1,31 @@
 package com.example.learnprojectopenglcube;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 public class MainActivity extends Activity {
 
-	private GLSurfaceView glSurface;
+	private GLSurfaceView glView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		glSurface = new GLSurfaceView(this);
-		glSurface.setRenderer(new Kocka());
-		setContentView(glSurface);
+      	super.onCreate(savedInstanceState);
+      	glView = new ClearGLSurfaceView(this);
+		setContentView(glView);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		glSurface.onResume();
+		glView.onResume();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		glSurface.onPause();
+		glView.onPause();
 	}
 
 }

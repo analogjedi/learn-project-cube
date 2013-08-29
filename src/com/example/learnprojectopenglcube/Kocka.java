@@ -6,9 +6,15 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLU;
 import android.opengl.GLSurfaceView.Renderer;
 
-public class Kocka implements Renderer {
+public class Kocka implements ClearGLSurfaceView.Renderer {
 	private kocka1 kocka;
-	private float speed; 	
+	private float speed;
+	
+	float angleX = 0;   // (NEW)
+	float angleY = 0;   // (NEW)
+	float speedX = 0;   // (NEW)
+	float speedY = 0;   // (NEW)
+	float z = -6.0f;    // (NEW)
 
 	public Kocka() {
 		kocka = new kocka1();
@@ -28,12 +34,14 @@ public class Kocka implements Renderer {
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);	
 		gl.glLoadIdentity();
 		
-		gl.glTranslatef(0.0f, -1.2f, -7.0f);
-		gl.glScalef(0.8f, 0.8f, 0.8f); 			
-		gl.glRotatef(speed, 1.0f, 1.0f, -1.0f);
-		kocka.draw(gl);
+		gl.glTranslatef(0.0f, 0.0f, z);   // Translate into the screen (NEW)
+		gl.glRotatef(angleX, 1.0f, 0.0f, 0.0f); // Rotate (NEW)
+		gl.glRotatef(angleY, 0.0f, 1.0f, 0.0f); // Rotate (NEW)
+  		kocka.draw(gl);
 
 		speed += 3.00f;
+	    angleX += speedX;  // (NEW)
+	    angleY += speedY;  // (NEW)
 	}
 
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
